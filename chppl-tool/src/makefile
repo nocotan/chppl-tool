@@ -1,5 +1,5 @@
 COMPILER = gcc
-CFLAGS   = -g
+CFLAGS   = -g -std=c++11 -lboost_regex
 LDFRAGS  = -L /usr/local/pgsql/lib/ -lpq -lcrypt -lstdc++
 LIBS     =
 INCLUDE  = -I /usr/local/pgsql/include/ -I /usr/local/pgsql/include/server/
@@ -9,7 +9,7 @@ SOURCES  = $(wildcard *.cpp)
 OBJECTS  = $(addprefix $(OBJDIR)/, $(SOURCES:.cpp=.o))
 
 $(TARGET): $(OBJECTS) $(LIBS)
-	$(COMPILER) -o $@ $^ $(LDFRAGS)
+	$(COMPILER) -o $@ $^ $(LDFRAGS) $(CFLAGS)
 
 $(OBJDIR)/%.o: %.cpp
 	@[ -d $(OBJDIR) ]

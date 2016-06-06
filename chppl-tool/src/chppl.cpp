@@ -1,9 +1,10 @@
 #include "../include/chppl.h"
 
 Cpgsql connect_psql();
-std::string query(std::string);
+std::string query(std::string, int&, char* argv[]);
 
 int main(int argc, char *argv[]) {
+  // raise error if argc < 2
   if (argc < 2) {
     std::cout << "argument error" << std::endl;
     exit(1);
@@ -11,8 +12,10 @@ int main(int argc, char *argv[]) {
 
   Cpgsql con = connect_psql();
 
-  std::string op = argv[1];
-  std::string q = query(op);
+  int query_flag = 0;
+
+  std::string argument = argv[1];
+  std::string q = query(argument, query_flag, argv);
 
   PGresult* res = con.m_ExecSql(q.c_str());
 
@@ -20,13 +23,14 @@ int main(int argc, char *argv[]) {
     exit(1);
   }
 
-  int n = PQnfields(res);
-  int rows = PQntuples(res);
+  Operation op(res);
 
-  std::cout << PQgetvalue(res, 1, PQfnumber(res, "name")) << std::endl;
+  if (1 == query_flag) {
+    op.search_all();
+  } else if (2 == query_flag) {
+    op.install_lib();
+  }
 
-
-  PQclear(res);
   return 0;
 }
 
@@ -39,11 +43,20 @@ Cpgsql connect_psql() {
   return con;
 }
 
-std::string query(std::string op) {
+std::string query(std::string argument, int &query_flag, char* argv[]) {
   std::string q = "invalid";
 
-  if (op == "search") {
+  if (argument == "search") {
     q = "SELECT * FROM libraries;";
+    query_flag = 1;
+  } else if (argument == "install") {
+      if (sizeof(argv) < 3) {
+        std::cout << "argument error" << std::endl;
+        exit(1);
+      }
+      std::string target = argv[2];
+      q = "SELECT * FROM libraries WHERE name = '" + target + "';";
+      query_flag = 2;
   } else {
     std::cout << "argument error" << std::endl;
     exit(1);
