@@ -1,17 +1,23 @@
 #include "../include/chppl.h"
 
-int main(int argc, char **argv) {
-  Cpgsql con(
-      "ec2-50-19-239-232.compute-1.amazonaws.com",
-      "agcdhswzpdwrbp",
-      "gurQBp9jT2t1eNMHI3P7Ew5g_0",
-      "d8rjp9952jhohi");
+Cpgsql connect_psql();
+std::string query(std::string);
 
-  std::cout << "connect" << std::endl;
-  PGresult* res = con.m_ExecSql("SELECT * FROM libraries;");
+int main(int argc, char *argv[]) {
+  if (argc < 2) {
+    std::cout << "argument error" << std::endl;
+    exit(1);
+  }
+
+  Cpgsql con = connect_psql();
+
+  std::string op = argv[1];
+  std::string q = query(op);
+
+  PGresult* res = con.m_ExecSql(q.c_str());
 
   if (NULL == res) {
-    return 1;
+    exit(1);
   }
 
   int n = PQnfields(res);
@@ -22,4 +28,26 @@ int main(int argc, char **argv) {
 
   PQclear(res);
   return 0;
+}
+
+Cpgsql connect_psql() {
+  Cpgsql con(
+      "ec2-50-19-239-232.compute-1.amazonaws.com",
+      "agcdhswzpdwrbp",
+      "gurQBp9jT2t1eNMHI3P7Ew5g_0",
+      "d8rjp9952jhohi");
+  return con;
+}
+
+std::string query(std::string op) {
+  std::string q = "invalid";
+
+  if (op == "search") {
+    q = "SELECT * FROM libraries;";
+  } else {
+    std::cout << "argument error" << std::endl;
+    exit(1);
+  }
+
+  return q;
 }
