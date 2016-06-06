@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
   std::string argument = argv[1];
   std::string q = query(argument, query_flag, argv);
 
-  PGresult* res = con.m_ExecSql(q.c_str());
+  PGresult*  res = con.m_ExecSql(q.c_str());
 
   if (NULL == res) {
     exit(1);
