@@ -4,9 +4,10 @@ C++ package manager
 
 
 ##Install
-```$ cd  
-```$ git clone https://github.com/nocotan/chppl-tool  
-```$ echo "export PATH=\$PATH:~/chppl-tool/chppl-tool/bin" >> ~/.bashrc```  
+```
+$ cd  
+$ git clone https://github.com/nocotan/chppl-tool  
+$ echo "export PATH=\$PATH:~/chppl-tool/chppl-tool/bin" >> ~/.bashrc```  
 
 
 ##Usage   
