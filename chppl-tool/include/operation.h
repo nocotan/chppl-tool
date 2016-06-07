@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <string>
+#include <sys/stat.h>
+#include <sys/types.h>
 #include <vector>
 #include "common_pg.h"
 

@@ -36,9 +36,20 @@ void Operation::search_all() {
 void Operation::install_lib() {
   // install libraries
   res = this->res;
+
   std::string url = PQgetvalue(res,0,PQfnumber(res,"url"));
+
   std::vector<std::string> splited_url = split(url, "/blob/");
+  std::vector<std::string> splited_url2 = split(url, "/");
+
+  std::string filename = splited_url2.back();
+
   std::string cmd = "svn export " + splited_url[0] + "/branches/" + splited_url[1];
+  cmd += " ~/.chppl/libs/";
+  cmd += filename;
+
+  system("mkdir ~/.chppl -p");
+  system("mkdir ~/.chppl/libs -p");
 
   system(cmd.c_str());
   PQclear(res);

@@ -1,5 +1,5 @@
 COMPILER = gcc
-CFLAGS   = -g -std=c++11
+CFLAGS   = -g -std=c++11 -lboost_filesystem
 LDFRAGS  = -L /usr/local/pgsql/lib/ -lpq -lcrypt -lstdc++
 LIBS     =
 INCLUDE  = -I /usr/local/pgsql/include/ -I /usr/local/pgsql/include/server/
