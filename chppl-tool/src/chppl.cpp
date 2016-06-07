@@ -1,9 +1,11 @@
+// chppl.cpp
 #include "../include/chppl.h"
 
 Cpgsql connect_psql();
 std::string query(std::string, int&, char* argv[]);
 
 int main(int argc, char *argv[]) {
+  // main block
   // raise error if argc < 2
   if (argc < 2) {
     std::cout << "argument error" << std::endl;
@@ -41,6 +43,7 @@ int main(int argc, char *argv[]) {
 }
 
 Cpgsql connect_psql() {
+  // connect db
   Cpgsql con(
       "ec2-50-19-239-232.compute-1.amazonaws.com",
       "agcdhswzpdwrbp",
@@ -50,6 +53,7 @@ Cpgsql connect_psql() {
 }
 
 std::string query(std::string argument, int &query_flag, char* argv[]) {
+  // return sql query
   std::string q = "invalid";
 
   if (argument == "search") {

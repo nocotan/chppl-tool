@@ -1,23 +1,28 @@
+// operation.cpp
 #include "../include/operation.h"
 
 std::vector<std::string> split(const std::string&, const std::string&);
 
 
 Operation::Operation(PGresult* res) {
+  // constructor
   this->res = res;
   this->n = PQnfields(res);
   this->rows = PQntuples(res);
 }
 
 int Operation::get_n() {
+  // PQfields getter
   return this->n;
 }
 
 int Operation::get_rows() {
+  // PQntuples getter
   return this->rows;
 }
 
 void Operation::search_all() {
+  // search all libraries
   res = this->res;
   rows = this->rows;
 
@@ -29,15 +34,18 @@ void Operation::search_all() {
 }
 
 void Operation::install_lib() {
+  // install libraries
   res = this->res;
   std::string url = PQgetvalue(res,0,PQfnumber(res,"url"));
   std::vector<std::string> splited_url = split(url, "/blob/");
   std::string cmd = "svn export " + splited_url[0] + "/branches/" + splited_url[1];
+
   system(cmd.c_str());
   PQclear(res);
 }
 
 std::vector<std::string> split(const std::string &str, const std::string &delim) {
+  // split string
   std::vector<std::string> result;
   size_t current = 0;
   size_t found;
