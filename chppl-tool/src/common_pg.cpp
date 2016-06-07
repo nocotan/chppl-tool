@@ -15,7 +15,7 @@ Cpgsql::~Cpgsql() {
 }
 
 PGresult* Cpgsql::m_ExecSql(const char* sql) {
-  res = PQexec(con, sql);
+  PGresult* res = PQexec(con, sql);
   if(PQresultStatus(res) != PGRES_TUPLES_OK) {
     std::cout << stderr << std::endl;
     PQclear(res);

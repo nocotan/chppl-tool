@@ -2,6 +2,7 @@
 #define INCLUDE_COMMON_H_
 
 #include <iostream>
+#include <string>
 #include "libpq-fe.h"
 #include "postgres.h"
 

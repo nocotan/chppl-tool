@@ -9,6 +9,14 @@ Operation::Operation(PGresult* res) {
   this->rows = PQntuples(res);
 }
 
+int Operation::get_n() {
+  return this->n;
+}
+
+int Operation::get_rows() {
+  return this->rows;
+}
+
 void Operation::search_all() {
   res = this->res;
   rows = this->rows;

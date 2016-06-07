@@ -25,6 +25,12 @@ int main(int argc, char *argv[]) {
 
   Operation op(res);
 
+  int rows = op.get_rows();
+  if (rows <= 0) {
+    std::cout << "argument error" << std::endl;
+    exit(1);
+  }
+
   if (1 == query_flag) {
     op.search_all();
   } else if (2 == query_flag) {
