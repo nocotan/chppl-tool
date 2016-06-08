@@ -21,3 +21,9 @@ $ echo "export PATH=\$PATH:~/chppl-tool/chppl-tool/bin" >> ~/.bashrc
 
 ###Install package  
 ```$ chppl install <package name>```  
+
+###Compile
+```$ g++ -I$HOME/.chppl/libs test.cpp```  
+
+##Require
+```$ sudo apt-get install subversion subversion-tools```
