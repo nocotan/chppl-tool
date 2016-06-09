@@ -1,7 +1,7 @@
 # chppl-tool
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues/nocotan/chppl-tool.svg)](https://github.com/nocotan/chppl-tool/issues)
-[![GitHub forks](https://img.shields.io/github/forks/nocotan/chppl-tool.svg)](https://github.com/nocotan/chppl-tool/network)
+[![GitHub stars](https://img.shields.io/github/stars/nocotan/chppl-tool.svg)](https://github.com/nocotan/chppl-tool/stargazers)
 C/C++ package manager for header only, single file library  
 like Python pip or Ruby gems  
 [chppL](https://chppl.herokuapp.com/)  
