@@ -16,6 +16,9 @@ $ echo "export PATH=\$PATH:~/chppl-tool/chppl-tool/bin" >> ~/.bashrc
 
 ##Usage   
 
+###Show help commands
+```$ chppl help```
+
 ###Search package  
 ```$ chppl search```  
 
