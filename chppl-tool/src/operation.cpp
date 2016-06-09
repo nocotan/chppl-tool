@@ -88,6 +88,12 @@ void Operation::uninstall_lib(std::string target) {
   system(cmd.c_str());
 }
 
+void Operation::show_list() {
+  // show installed libraries
+  std::string cmd = "ls ~/.chppl/libs/";
+  system(cmd.c_str());
+}
+
 void Operation::help() {
   // display help
   std::cout << std::endl;
@@ -97,6 +103,7 @@ void Operation::help() {
   std::cout << "Commands:" << std::endl;
   std::cout << "  install    Install packages." << std::endl;
   std::cout << "  download   Download packages." << std::endl;
+  std::cout << "  uninstall  Uninstall packages." << std::endl;
   std::cout << "  search     Search packages." << std::endl;
   std::cout << "  help       Show help for commands." << std::endl;
   std::cout << std::endl;

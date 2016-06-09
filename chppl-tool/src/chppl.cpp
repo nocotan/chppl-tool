@@ -110,6 +110,11 @@ std::string query(std::string argument, int &query_flag, char* argv[]) {
     op.uninstall_lib(target);
     exit(0);
   }
+  else if (argument == "list") {
+    Operation op = Operation();
+    op.show_list();
+    exit(0);
+  }
   else if (argument == "help") {
     Operation op = Operation();
     op.help();
