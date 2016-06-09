@@ -41,8 +41,12 @@ int main(int argc, char *argv[]) {
 
   if (1 == query_flag) {
     op.search_all();
-  } else if (2 == query_flag) {
+  }
+  else if (2 == query_flag) {
     op.install_lib();
+  }
+  else if (3 == query_flag) {
+    op.download_lib();
   }
 
   return 0;
@@ -78,6 +82,19 @@ std::string query(std::string argument, int &query_flag, char* argv[]) {
     std::string target = argv[2];
     q = "SELECT * FROM libraries WHERE name = '" + target + "';";
     query_flag = 2;
+  }
+  else if (argument == "download") {
+    if (sizeof(argv) < 3) {
+      std::cout << "argument error" << std::endl;
+      exit(1);
+    }
+    Validate v = Validate();
+    if (v.validate_input(argv[2]) != true) {
+      exit(1);
+    }
+    std::string target = argv[2];
+    q = "SELECT * FROM libraries WHERE name = '" + target + "';";
+    query_flag = 3;
   }
   else if (argument == "help") {
     Operation op = Operation();

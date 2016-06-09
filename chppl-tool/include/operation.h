@@ -21,6 +21,7 @@ class Operation {
     void set_result(PGresult*);
     void search_all();
     void install_lib();
+    void download_lib();
     void help();
 };
 

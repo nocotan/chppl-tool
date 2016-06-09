@@ -61,6 +61,26 @@ void Operation::install_lib() {
   PQclear(res);
 }
 
+void Operation::download_lib() {
+  // download libraries
+  res = this->res;
+
+  std::string url = PQgetvalue(res,0,PQfnumber(res,"url"));
+
+  std::vector<std::string> splited_url = split(url, "/blob/");
+  std::vector<std::string> splited_url2 = split(url, "/");
+
+  std::string filename = splited_url2.back();
+
+  std::string cmd = "svn export " + splited_url[0] + "/branches/" + splited_url[1];
+
+  system("mkdir ~/.chppl -p");
+  system("mkdir ~/.chppl/libs -p");
+
+  system(cmd.c_str());
+  PQclear(res);
+}
+
 void Operation::help() {
   // display help
   std::cout << std::endl;
@@ -69,6 +89,7 @@ void Operation::help() {
   std::cout << std::endl;
   std::cout << "Commands:" << std::endl;
   std::cout << "  install    Install packages." << std::endl;
+  std::cout << "  download   Download packages." << std::endl;
   std::cout << "  search     Search packages." << std::endl;
   std::cout << "  help       Show help for commands." << std::endl;
   std::cout << std::endl;
