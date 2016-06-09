@@ -5,5 +5,6 @@
 #include <string>
 #include "common_pg.h"
 #include "operation.h"
+#include "validate.h"
 
 #endif

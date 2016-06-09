@@ -12,6 +12,10 @@ int main(int argc, char *argv[]) {
     exit(1);
   }
 
+  if (!Validate::validate_input(argv[1])) {
+    exit(1);
+  }
+
   Cpgsql con = connect_psql();
 
   int query_flag = 0;
@@ -62,6 +66,9 @@ std::string query(std::string argument, int &query_flag, char* argv[]) {
   } else if (argument == "install") {
       if (sizeof(argv) < 3) {
         std::cout << "argument error" << std::endl;
+        exit(1);
+      }
+      if (!Validate::validate_input(argv[2])) {
         exit(1);
       }
       std::string target = argv[2];

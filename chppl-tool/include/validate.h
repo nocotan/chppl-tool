@@ -5,7 +5,9 @@
 #include <string>
 
 class Validate {
-
+  public:
+    Validate();
+    bool validate_input(std::string);
 };
 
 #endif
