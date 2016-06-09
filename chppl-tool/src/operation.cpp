@@ -104,7 +104,7 @@ void Operation::help() {
   std::cout << "  install    Install packages." << std::endl;
   std::cout << "  download   Download packages." << std::endl;
   std::cout << "  uninstall  Uninstall packages." << std::endl;
-  std::cout << "  list       Show installed packages." << std::endl;
+  std::cout << "  list       List installed packages." << std::endl;
   std::cout << "  search     Search packages." << std::endl;
   std::cout << "  help       Show help for commands." << std::endl;
   std::cout << std::endl;
