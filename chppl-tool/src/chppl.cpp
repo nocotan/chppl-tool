@@ -96,6 +96,20 @@ std::string query(std::string argument, int &query_flag, char* argv[]) {
     q = "SELECT * FROM libraries WHERE name = '" + target + "';";
     query_flag = 3;
   }
+  else if (argument == "uninstall") {
+    if (sizeof(argv) < 3) {
+      std::cout << "argument error" << std::endl;
+      exit(1);
+    }
+    Validate v = Validate();
+    if (v.validate_input(argv[2]) != true) {
+      exit(1);
+    }
+    std::string target = argv[2];
+    Operation op = Operation();
+    op.uninstall_lib(target);
+    exit(0);
+  }
   else if (argument == "help") {
     Operation op = Operation();
     op.help();

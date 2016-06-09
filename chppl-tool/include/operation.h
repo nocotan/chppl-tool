@@ -22,6 +22,7 @@ class Operation {
     void search_all();
     void install_lib();
     void download_lib();
+    void uninstall_lib(std::string);
     void help();
 };
 

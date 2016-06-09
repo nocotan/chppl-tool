@@ -81,6 +81,13 @@ void Operation::download_lib() {
   PQclear(res);
 }
 
+void Operation::uninstall_lib(std::string target) {
+  // uninstall libraries
+  std::string cmd = "rm ~/.chppl/libs/" + target;
+
+  system(cmd.c_str());
+}
+
 void Operation::help() {
   // display help
   std::cout << std::endl;
