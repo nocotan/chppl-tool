@@ -11,8 +11,9 @@ int main(int argc, char *argv[]) {
     std::cout << "argument error" << std::endl;
     exit(1);
   }
+  Validate v = Validate();
 
-  if (!Validate::validate_input(argv[1])) {
+  if (v.validate_input(argv[1]) != true) {
     exit(1);
   }
 
@@ -68,7 +69,8 @@ std::string query(std::string argument, int &query_flag, char* argv[]) {
         std::cout << "argument error" << std::endl;
         exit(1);
       }
-      if (!Validate::validate_input(argv[2])) {
+      Validate v = Validate();
+      if (v.validate_input(argv[2]) != true) {
         exit(1);
       }
       std::string target = argv[2];
