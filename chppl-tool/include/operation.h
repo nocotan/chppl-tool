@@ -14,11 +14,14 @@ class Operation {
     int n;
     int rows;
   public:
-    Operation(PGresult* res);
+    Operation();
     int get_n();
     int get_rows();
+    void get_result();
+    void set_result(PGresult*);
     void search_all();
     void install_lib();
+    void help();
 };
 
 #endif

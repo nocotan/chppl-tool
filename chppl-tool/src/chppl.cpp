@@ -30,7 +30,8 @@ int main(int argc, char *argv[]) {
     exit(1);
   }
 
-  Operation op(res);
+  Operation op = Operation();
+  op.set_result(res);
 
   int rows = op.get_rows();
   if (rows <= 0) {
@@ -64,19 +65,26 @@ std::string query(std::string argument, int &query_flag, char* argv[]) {
   if (argument == "search") {
     q = "SELECT * FROM libraries;";
     query_flag = 1;
-  } else if (argument == "install") {
-      if (sizeof(argv) < 3) {
-        std::cout << "argument error" << std::endl;
-        exit(1);
-      }
-      Validate v = Validate();
-      if (v.validate_input(argv[2]) != true) {
-        exit(1);
-      }
-      std::string target = argv[2];
-      q = "SELECT * FROM libraries WHERE name = '" + target + "';";
-      query_flag = 2;
-  } else {
+  }
+  else if (argument == "install") {
+    if (sizeof(argv) < 3) {
+      std::cout << "argument error" << std::endl;
+      exit(1);
+    }
+    Validate v = Validate();
+    if (v.validate_input(argv[2]) != true) {
+      exit(1);
+    }
+    std::string target = argv[2];
+    q = "SELECT * FROM libraries WHERE name = '" + target + "';";
+    query_flag = 2;
+  }
+  else if (argument == "help") {
+    Operation op = Operation();
+    op.help();
+    exit(0);
+  }
+  else {
     std::cout << "argument error" << std::endl;
     exit(1);
   }

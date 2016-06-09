@@ -4,11 +4,11 @@
 std::vector<std::string> split(const std::string&, const std::string&);
 
 
-Operation::Operation(PGresult* res) {
+Operation::Operation() {
   // constructor
-  this->res = res;
-  this->n = PQnfields(res);
-  this->rows = PQntuples(res);
+  this->res;
+  this->n;
+  this->rows;
 }
 
 int Operation::get_n() {
@@ -19,6 +19,12 @@ int Operation::get_n() {
 int Operation::get_rows() {
   // PQntuples getter
   return this->rows;
+}
+
+void Operation::set_result(PGresult* res) {
+  this->res = res;
+  this->n = PQnfields(res);
+  this->rows = PQntuples(res);
 }
 
 void Operation::search_all() {
@@ -53,6 +59,19 @@ void Operation::install_lib() {
 
   system(cmd.c_str());
   PQclear(res);
+}
+
+void Operation::help() {
+  // display help
+  std::cout << std::endl;
+  std::cout << "Usage:" << std::endl;
+  std::cout << "chppl <command> [options]" << std::endl;
+  std::cout << std::endl;
+  std::cout << "Commands:" << std::endl;
+  std::cout << "  install    Install packages." << std::endl;
+  std::cout << "  search     Search packages." << std::endl;
+  std::cout << "  help       Show help for commands." << std::endl;
+  std::cout << std::endl;
 }
 
 std::vector<std::string> split(const std::string &str, const std::string &delim) {
