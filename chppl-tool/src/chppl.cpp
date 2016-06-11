@@ -15,6 +15,7 @@ int main(int argc, char *argv[]) {
   Validate v = Validate();
 
   if (v.validate_input(argv[1]) != true) {
+    error.error_invalid_args();
     exit(1);
   }
 
@@ -28,6 +29,7 @@ int main(int argc, char *argv[]) {
   PGresult*  res = con.m_ExecSql(q.c_str());
 
   if (NULL == res) {
+    error.error_invalid_args();
     exit(1);
   }
 
@@ -36,7 +38,7 @@ int main(int argc, char *argv[]) {
 
   int rows = op.get_rows();
   if (rows <= 0) {
-    std::cout << "argument error" << std::endl;
+    error.error_invalid_args();
     exit(1);
   }
 
@@ -78,9 +80,12 @@ std::string query(std::string argument, int &query_flag, char* argv[], int argc)
       error.error_num_of_args();
       exit(1);
     }
+
     if (v.validate_input(argv[2]) != true) {
+      error.error_invalid_args();
       exit(1);
     }
+
     std::string target = argv[2];
     q = "SELECT * FROM libraries WHERE name = '" + target + "';";
     query_flag = 2;
@@ -90,9 +95,12 @@ std::string query(std::string argument, int &query_flag, char* argv[], int argc)
       error.error_num_of_args();
       exit(1);
     }
+
     if (v.validate_input(argv[2]) != true) {
+      error.error_invalid_args();
       exit(1);
     }
+
     std::string target = argv[2];
     q = "SELECT * FROM libraries WHERE name = '" + target + "';";
     query_flag = 3;
@@ -102,9 +110,12 @@ std::string query(std::string argument, int &query_flag, char* argv[], int argc)
       error.error_num_of_args();
       exit(1);
     }
+
     if (v.validate_input(argv[2]) != true) {
+      error.error_invalid_args();
       exit(1);
     }
+
     std::string target = argv[2];
     Operation op = Operation();
     op.uninstall_lib(target);
@@ -121,7 +132,7 @@ std::string query(std::string argument, int &query_flag, char* argv[], int argc)
     exit(0);
   }
   else {
-    std::cout << "argument error" << std::endl;
+    error.error_not_found_command();
     exit(1);
   }
 
