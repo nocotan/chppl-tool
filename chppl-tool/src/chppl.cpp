@@ -2,13 +2,14 @@
 #include "../include/chppl.h"
 
 Cpgsql connect_psql();
-std::string query(std::string, int&, char* argv[]);
+std::string query(std::string, int&, char* argv[], int);
 
 int main(int argc, char *argv[]) {
   // main block
   // raise error if argc < 2
+  Error error = Error();
   if (argc < 2) {
-    std::cout << "argument error" << std::endl;
+    error.error_num_of_args();
     exit(1);
   }
   Validate v = Validate();
@@ -22,7 +23,7 @@ int main(int argc, char *argv[]) {
   int query_flag = 0;
 
   std::string argument = argv[1];
-  std::string q = query(argument, query_flag, argv);
+  std::string q = query(argument, query_flag, argv, argc);
 
   PGresult*  res = con.m_ExecSql(q.c_str());
 
@@ -62,20 +63,21 @@ Cpgsql connect_psql() {
   return con;
 }
 
-std::string query(std::string argument, int &query_flag, char* argv[]) {
+std::string query(std::string argument, int &query_flag, char* argv[], int argc) {
   // return sql query
   std::string q = "invalid";
+  Error error = Error();
+  Validate v = Validate();
 
   if (argument == "search") {
     q = "SELECT * FROM libraries;";
     query_flag = 1;
   }
   else if (argument == "install") {
-    if (sizeof(argv) < 3) {
-      std::cout << "argument error" << std::endl;
+    if (argc < 3) {
+      error.error_num_of_args();
       exit(1);
     }
-    Validate v = Validate();
     if (v.validate_input(argv[2]) != true) {
       exit(1);
     }
@@ -84,11 +86,10 @@ std::string query(std::string argument, int &query_flag, char* argv[]) {
     query_flag = 2;
   }
   else if (argument == "download") {
-    if (sizeof(argv) < 3) {
-      std::cout << "argument error" << std::endl;
+    if (argc < 3) {
+      error.error_num_of_args();
       exit(1);
     }
-    Validate v = Validate();
     if (v.validate_input(argv[2]) != true) {
       exit(1);
     }
@@ -97,11 +98,10 @@ std::string query(std::string argument, int &query_flag, char* argv[]) {
     query_flag = 3;
   }
   else if (argument == "uninstall") {
-    if (sizeof(argv) < 3) {
-      std::cout << "argument error" << std::endl;
+    if (argc < 3) {
+      error.error_num_of_args();
       exit(1);
     }
-    Validate v = Validate();
     if (v.validate_input(argv[2]) != true) {
       exit(1);
     }
