@@ -24,6 +24,7 @@ class Operation {
     void download_lib();
     void uninstall_lib(std::string);
     void show_list();
+    void show_description();
     void help();
 };
 
