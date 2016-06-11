@@ -94,6 +94,18 @@ void Operation::show_list() {
   system(cmd.c_str());
 }
 
+void Operation::show_description() {
+  // show description
+  res = this->res;
+  rows = this->rows;
+
+  for (int i=0; i<rows; ++i) {
+    std::cout << PQgetvalue(res, i, PQfnumber(res, "description")) << std::endl;
+  }
+
+  PQclear(res);
+}
+
 void Operation::help() {
   // display help
   std::cout << std::endl;

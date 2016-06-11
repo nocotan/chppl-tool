@@ -51,6 +51,9 @@ int main(int argc, char *argv[]) {
   else if (3 == query_flag) {
     op.download_lib();
   }
+  else if (4 == query_flag) {
+    op.show_description();
+  }
 
   return 0;
 }
@@ -120,6 +123,21 @@ std::string query(std::string argument, int &query_flag, char* argv[], int argc)
     Operation op = Operation();
     op.uninstall_lib(target);
     exit(0);
+  }
+  else if (argument == "show") {
+    if (argc < 3) {
+      error.error_num_of_args();
+      exit(1);
+    }
+
+    if (v.validate_input(argv[2]) != true) {
+      error.error_invalid_args();
+      exit(1);
+    }
+
+    std::string target = argv[2];
+    q = "SELECT * FROM libraries WHERE name = '" + target + "';";
+    query_flag = 4;
   }
   else if (argument == "list") {
     Operation op = Operation();
