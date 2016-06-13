@@ -8,14 +8,17 @@ OBJDIR   = ./obj
 SOURCES  = $(wildcard *.cpp)
 OBJECTS  = $(addprefix $(OBJDIR)/, $(SOURCES:.cpp=.o))
 
+all:
+.PHONY: all clean
+
 $(TARGET): $(OBJECTS) $(LIBS)
 	$(COMPILER) -o $@ $^ $(LDFRAGS) $(CFLAGS)
 
 $(OBJDIR)/%.o: %.cpp
-	@[ -d $(OBJDIR) ]
+	@[ -d $(OBJDIR) ] || mkdir -p $(OBJDIR)
 	$(COMPILER) $(CFLAGS) $(INCLUDE) -o $@ -c $<
 
 all: clean $(TARGET)
 
-clean: rm -f $(OBJECTS) $(TARGET)
-
+clean:
+	rm -f $(OBJECTS) $(TARGET)
