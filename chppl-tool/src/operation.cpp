@@ -1,7 +1,8 @@
 // operation.cpp
 #include "../include/operation.h"
+#include <cstddef>
 
-std::vector<std::string> split(const std::string&, const std::string&);
+static std::vector<std::string> split(const std::string&, const std::string&);
 
 
 Operation::Operation() {
@@ -45,12 +46,12 @@ void Operation::install_lib() const{
 
   std::string url = PQgetvalue(res,0,PQfnumber(res,"url"));
 
-  std::vector<std::string> splited_url = split(url, "/blob/");
-  std::vector<std::string> splited_url2 = split(url, "/");
+  std::vector<std::string> splitted_url = split(url, "/blob/");
+  std::vector<std::string> splitted_url2 = split(url, "/");
 
-  std::string filename = splited_url2.back();
+  std::string filename = splitted_url2.back();
 
-  std::string cmd = "svn export " + splited_url[0] + "/branches/" + splited_url[1];
+  std::string cmd = "svn export " + splitted_url[0] + "/branches/" + splitted_url[1];
   cmd += " ~/.chppl/libs/";
   cmd += filename;
 
@@ -67,12 +68,12 @@ void Operation::download_lib() const{
 
   std::string url = PQgetvalue(res,0,PQfnumber(res,"url"));
 
-  std::vector<std::string> splited_url = split(url, "/blob/");
-  std::vector<std::string> splited_url2 = split(url, "/");
+  std::vector<std::string> splitted_url = split(url, "/blob/");
+  std::vector<std::string> splitted_url2 = split(url, "/");
 
-  std::string filename = splited_url2.back();
+  std::string filename = splitted_url2.back();
 
-  std::string cmd = "svn export " + splited_url[0] + "/branches/" + splited_url[1];
+  std::string cmd = "svn export " + splitted_url[0] + "/branches/" + splitted_url[1];
 
   system("mkdir ~/.chppl -p");
   system("mkdir ~/.chppl/libs -p");
@@ -122,19 +123,19 @@ void Operation::help() const{
   std::cout << std::endl;
 }
 
-std::vector<std::string> split(const std::string &str, const std::string &delim) {
+static std::vector<std::string> split(const std::string &str, const std::string &delim) {
   // split string
   std::vector<std::string> result;
-  size_t current = 0;
-  size_t found;
-  size_t delimlen = delim.size();
+  std::size_t current = 0;
+  std::size_t found;
+  std::size_t delimlen = delim.size();
 
   while ((found = str.find(delim, current)) != std::string::npos) {
-    result.push_back(std::string(str, current, found - current));
+    result.emplace_back(str, current, found - current);
     current = found + delimlen;
   }
 
-  result.push_back(std::string(str, current, str.size() - current));
+  result.emplace_back(std::string(str, current, str.size() - current));
 
   return result;
 }
