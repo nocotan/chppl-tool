@@ -52,7 +52,10 @@ int main(int argc, char *argv[]) {
   }
 
   if (QUERY_FLAG_SEARCH == query_flag) {
-    op.search_all();
+    if(argc >= 3)
+      op.search_string(argv[2]);
+    else
+      op.search_all();
   }
   else if (QUERY_FLAG_INSTALL == query_flag) {
     op.install_lib();

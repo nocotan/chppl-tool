@@ -40,6 +40,31 @@ void Operation::search_all() const{
   PQclear(res);
 }
 
+void Operation::search_string(const std::string& needle) const{
+  // search libraries containing the specified string
+  PGresult* res = this->res;
+  int rows = this->rows;
+
+  int fnumberOfName = PQfnumber(res, "name");
+  std::string name;
+  bool flagFound = false;
+  for (int i=0; i<rows; ++i) {
+    name = PQgetvalue(res, i, fnumberOfName);
+    if(name.find(needle) != std::string::npos){
+      std::cout << name << "\n";
+      flagFound = true;
+    }
+  }
+
+  if(flagFound)
+    std::cout << std::flush;
+  else{
+    std::cerr << "no libraries matching '" << needle << "' found." << std::endl;
+  }
+
+  PQclear(res);
+}
+
 void Operation::install_lib() const{
   // install libraries
   PGresult* res = this->res;
