@@ -15,17 +15,18 @@ class Operation {
     int rows;
   public:
     Operation();
-    int get_n();
-    int get_rows();
-    void get_result();
+    int get_n() const;
+    int get_rows() const;
+    void get_result() const;
     void set_result(PGresult*);
-    void search_all();
-    void install_lib();
-    void download_lib();
-    void uninstall_lib(std::string);
-    void show_list();
-    void show_description();
-    void help();
+    void search_string(const char** needles, int count) const;
+    void search_all() const;
+    void install_lib() const;
+    void download_lib() const;
+    void uninstall_lib(const std::string&) const;
+    void show_list() const;
+    void show_description() const;
+    void help() const;
 };
 
 #endif
