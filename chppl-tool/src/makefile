@@ -14,12 +14,12 @@ all:
 $(TARGET): $(OBJECTS) $(LIBS)
 	$(COMPILER) -o $@ $^ $(LDFRAGS) $(CFLAGS)
 
--include $(OBJDIR)/*.d
+-include $(OBJDIR)/*.dep
 $(OBJDIR)/%.o: %.cpp
 	@[ -d $(OBJDIR) ] || mkdir -p $(OBJDIR)
-	$(COMPILER) $(CFLAGS) $(INCLUDE) -MD -MF $(@:.o=.d) -o $@ -c $<
+	$(COMPILER) $(CFLAGS) $(INCLUDE) -MD -MF $(@:.o=.dep) -o $@ -c $<
 
 all: $(TARGET)
 
 clean:
-	rm -f $(OBJECTS) $(OBJECTS:.o=.d) $(TARGET)
+	rm -f $(OBJECTS) $(OBJECTS:.o=.dep) $(TARGET)
