@@ -11,12 +11,12 @@ Operation::Operation() {
   this->rows;
 }
 
-int Operation::get_n() {
+int Operation::get_n() const{
   // PQfields getter
   return this->n;
 }
 
-int Operation::get_rows() {
+int Operation::get_rows() const{
   // PQntuples getter
   return this->rows;
 }
@@ -27,10 +27,10 @@ void Operation::set_result(PGresult* res) {
   this->rows = PQntuples(res);
 }
 
-void Operation::search_all() {
+void Operation::search_all() const{
   // search all libraries
-  res = this->res;
-  rows = this->rows;
+  PGresult* res = this->res;
+  int rows = this->rows;
 
   for (int i=0; i<rows; ++i) {
     std::cout << PQgetvalue(res, i, PQfnumber(res, "name")) << std::endl;
@@ -39,9 +39,9 @@ void Operation::search_all() {
   PQclear(res);
 }
 
-void Operation::install_lib() {
+void Operation::install_lib() const{
   // install libraries
-  res = this->res;
+  PGresult* res = this->res;
 
   std::string url = PQgetvalue(res,0,PQfnumber(res,"url"));
 
@@ -61,9 +61,9 @@ void Operation::install_lib() {
   PQclear(res);
 }
 
-void Operation::download_lib() {
+void Operation::download_lib() const{
   // download libraries
-  res = this->res;
+  PGresult* res = this->res;
 
   std::string url = PQgetvalue(res,0,PQfnumber(res,"url"));
 
@@ -81,23 +81,23 @@ void Operation::download_lib() {
   PQclear(res);
 }
 
-void Operation::uninstall_lib(std::string target) {
+void Operation::uninstall_lib(const std::string& target) const{
   // uninstall libraries
   std::string cmd = "rm ~/.chppl/libs/" + target;
 
   system(cmd.c_str());
 }
 
-void Operation::show_list() {
+void Operation::show_list() const{
   // show installed libraries
   std::string cmd = "ls ~/.chppl/libs/";
   system(cmd.c_str());
 }
 
-void Operation::show_description() {
+void Operation::show_description() const{
   // show description
-  res = this->res;
-  rows = this->rows;
+  PGresult* res = this->res;
+  int rows = this->rows;
 
   for (int i=0; i<rows; ++i) {
     std::cout << PQgetvalue(res, i, PQfnumber(res, "description")) << std::endl;
@@ -106,7 +106,7 @@ void Operation::show_description() {
   PQclear(res);
 }
 
-void Operation::help() {
+void Operation::help() const{
   // display help
   std::cout << std::endl;
   std::cout << "Usage:" << std::endl;
