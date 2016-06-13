@@ -153,12 +153,12 @@ void Operation::help() const{
   std::cout << "chppl <command> [options]" << std::endl;
   std::cout << std::endl;
   std::cout << "Commands:" << std::endl;
-  std::cout << "  install    Install packages." << std::endl;
-  std::cout << "  download   Download packages." << std::endl;
-  std::cout << "  uninstall  Uninstall packages." << std::endl;
+  std::cout << "  install <package name>    Install packages." << std::endl;
+  std::cout << "  download <package name>   Download packages." << std::endl;
+  std::cout << "  uninstall <package name>  Uninstall packages." << std::endl;
   std::cout << "  list       List installed packages." << std::endl;
-  std::cout << "  search     Search packages." << std::endl;
-  std::cout << "  help       Show help for commands." << std::endl;
+  std::cout << "  search <package name>     Search packages." << std::endl;
+  std::cout << "  help                      Show help for commands." << std::endl;
   std::cout << std::endl;
 }
 
