@@ -12,10 +12,9 @@ $(TARGET): $(OBJECTS) $(LIBS)
 	$(COMPILER) -o $@ $^ $(LDFRAGS) $(CFLAGS)
 
 $(OBJDIR)/%.o: %.cpp
-	@[ -d $(OBJDIR) ]
+	@[ -d $(OBJDIR) ] || mkdir -p $(OBJDIR)
 	$(COMPILER) $(CFLAGS) $(INCLUDE) -o $@ -c $<
 
 all: clean $(TARGET)
 
 clean: rm -f $(OBJECTS) $(TARGET)
-
