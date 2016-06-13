@@ -19,14 +19,15 @@ int main(int argc, char *argv[]) {
     exit(1);
   }
 
-  Cpgsql con = connect_psql();
-
   int query_flag = 0;
 
   std::string argument = argv[1];
   std::string q = query(argument, query_flag, argv, argc);
 
-  PGresult*  res = con.m_ExecSql(q.c_str());
+  std::cerr << "chppl: connecting..." << std::flush;
+  Cpgsql con = connect_psql();
+  PGresult* res = con.m_ExecSql(q.c_str());
+  std::cerr << std::endl;
 
   if (NULL == res) {
     error.error_invalid_args();
