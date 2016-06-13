@@ -2,24 +2,32 @@
 #include "../include/chppl.h"
 
 Cpgsql connect_psql();
-std::string query(std::string, int&, char* argv[], int);
+static std::string query(const std::string&, int&, char* argv[], int);
+
+enum QUERY_FLAG{
+  QUERY_FLAG_UNKNOWN  = 0,
+  QUERY_FLAG_SEARCH   = 1,
+  QUERY_FLAG_INSTALL  = 2,
+  QUERY_FLAG_DOWNLOAD = 3,
+  QUERY_FLAG_SHOW     = 4,
+};
 
 int main(int argc, char *argv[]) {
   // main block
   // raise error if argc < 2
-  Error error = Error();
+  Error error;
   if (argc < 2) {
     error.error_num_of_args();
     exit(1);
   }
-  Validate v = Validate();
 
+  Validate v;
   if (v.validate_input(argv[1]) != true) {
     error.error_invalid_args();
     exit(1);
   }
 
-  int query_flag = 0;
+  int query_flag = QUERY_FLAG_UNKNOWN;
 
   std::string argument = argv[1];
   std::string q = query(argument, query_flag, argv, argc);
@@ -34,7 +42,7 @@ int main(int argc, char *argv[]) {
     exit(1);
   }
 
-  Operation op = Operation();
+  Operation op;
   op.set_result(res);
 
   int rows = op.get_rows();
@@ -43,16 +51,16 @@ int main(int argc, char *argv[]) {
     exit(1);
   }
 
-  if (1 == query_flag) {
+  if (QUERY_FLAG_SEARCH == query_flag) {
     op.search_all();
   }
-  else if (2 == query_flag) {
+  else if (QUERY_FLAG_INSTALL == query_flag) {
     op.install_lib();
   }
-  else if (3 == query_flag) {
+  else if (QUERY_FLAG_DOWNLOAD == query_flag) {
     op.download_lib();
   }
-  else if (4 == query_flag) {
+  else if (QUERY_FLAG_SHOW == query_flag) {
     op.show_description();
   }
 
@@ -69,15 +77,15 @@ Cpgsql connect_psql() {
   return con;
 }
 
-std::string query(std::string argument, int &query_flag, char* argv[], int argc) {
+static std::string query(const std::string& argument, int &query_flag, char* argv[], int argc) {
   // return sql query
   std::string q = "invalid";
-  Error error = Error();
-  Validate v = Validate();
+  Error error;
+  Validate v;
 
   if (argument == "search") {
     q = "SELECT * FROM libraries;";
-    query_flag = 1;
+    query_flag = QUERY_FLAG_SEARCH;
   }
   else if (argument == "install") {
     if (argc < 3) {
@@ -92,7 +100,7 @@ std::string query(std::string argument, int &query_flag, char* argv[], int argc)
 
     std::string target = argv[2];
     q = "SELECT * FROM libraries WHERE name = '" + target + "';";
-    query_flag = 2;
+    query_flag = QUERY_FLAG_INSTALL;
   }
   else if (argument == "download") {
     if (argc < 3) {
@@ -107,7 +115,7 @@ std::string query(std::string argument, int &query_flag, char* argv[], int argc)
 
     std::string target = argv[2];
     q = "SELECT * FROM libraries WHERE name = '" + target + "';";
-    query_flag = 3;
+    query_flag = QUERY_FLAG_DOWNLOAD;
   }
   else if (argument == "uninstall") {
     if (argc < 3) {
@@ -138,15 +146,15 @@ std::string query(std::string argument, int &query_flag, char* argv[], int argc)
 
     std::string target = argv[2];
     q = "SELECT * FROM libraries WHERE name = '" + target + "';";
-    query_flag = 4;
+    query_flag = QUERY_FLAG_SHOW;
   }
   else if (argument == "list") {
-    Operation op = Operation();
+    Operation op;
     op.show_list();
     exit(0);
   }
   else if (argument == "help") {
-    Operation op = Operation();
+    Operation op;
     op.help();
     exit(0);
   }
