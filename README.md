@@ -18,6 +18,8 @@ like Python pip or Ruby gems
 ```
 $ cd  
 $ git clone https://github.com/nocotan/chppl-tool  
+$ cd chppl-tool/chppl-tool/src
+$ make
 $ echo "export PATH=$PATH:~/chppl-tool/chppl-tool/bin" >> ~/.bashrc
 ```  
 
@@ -40,4 +42,4 @@ $ echo "export PATH=$PATH:~/chppl-tool/chppl-tool/bin" >> ~/.bashrc
 ```$ g++ -I$HOME/.chppl/libs test.cpp```  
 
 ##Require
-```$ sudo apt-get install subversion subversion-tools```
+```$ sudo apt-get install subversion subversion-tools postgresql postgresql-server-dev-9.3```
