@@ -42,4 +42,5 @@ $ echo "export PATH=$PATH:~/chppl-tool/chppl-tool/bin" >> ~/.bashrc
 ```$ g++ -I$HOME/.chppl/libs test.cpp```  
 
 ##Require
+###Linux
 ```$ sudo apt-get install subversion subversion-tools postgresql postgresql-server-dev-9.3```
