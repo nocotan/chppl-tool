@@ -1,8 +1,8 @@
 COMPILER = gcc
-CFLAGS   = -g -std=c++11 -lboost_filesystem
-LDFRAGS  = -L /usr/local/pgsql/lib/ -lpq -lcrypt -lstdc++
+CFLAGS   = -g -std=c++11 
+LDFRAGS  = -L /usr/local/pgsql/lib/ -lpq  -lstdc++
 LIBS     =
-INCLUDE  = -I /usr/local/pgsql/include/ -I /usr/local/pgsql/include/server/ -I $(shell pg_config --includedir) -I $(shell pg_config --includedir-server)
+INCLUDE  = -I $(shell pg_config --includedir) -I $(shell pg_config --includedir-server)
 TARGET   = ../bin/chppl
 OBJDIR   = ./obj
 SOURCES  = $(wildcard *.cpp)
