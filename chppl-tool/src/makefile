@@ -17,4 +17,5 @@ $(OBJDIR)/%.o: %.cpp
 
 all: clean $(TARGET)
 
-clean: rm -f $(OBJECTS) $(TARGET)
+clean:
+	rm -f $(OBJECTS) $(TARGET)
