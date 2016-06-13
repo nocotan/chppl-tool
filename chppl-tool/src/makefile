@@ -1,6 +1,6 @@
 COMPILER = gcc
-CFLAGS   = -g -std=c++11 
-LDFRAGS  = -L /usr/local/pgsql/lib/ -lpq  -lstdc++
+CFLAGS   = -g -std=c++11
+LDFRAGS  = -L $(shell pg_config --libdir) -lpq  -lstdc++
 LIBS     =
 INCLUDE  = -I $(shell pg_config --includedir) -I $(shell pg_config --includedir-server)
 TARGET   = ../bin/chppl
