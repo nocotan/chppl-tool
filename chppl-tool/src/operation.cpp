@@ -174,7 +174,7 @@ static std::vector<std::string> split(const std::string &str, const std::string 
     current = found + delimlen;
   }
 
-  result.emplace_back(std::string(str, current, str.size() - current));
+  result.emplace_back(str, current, str.size() - current);
 
   return result;
 }
