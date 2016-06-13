@@ -53,7 +53,7 @@ int main(int argc, char *argv[]) {
 
   if (QUERY_FLAG_SEARCH == query_flag) {
     if(argc >= 3)
-      op.search_string(argv[2]);
+      op.search_string(const_cast<const char**>(argv+2), argc-2);
     else
       op.search_all();
   }

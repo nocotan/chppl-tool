@@ -19,7 +19,7 @@ class Operation {
     int get_rows() const;
     void get_result() const;
     void set_result(PGresult*);
-    void search_string(const std::string&) const;
+    void search_string(const char** needles, int count) const;
     void search_all() const;
     void install_lib() const;
     void download_lib() const;

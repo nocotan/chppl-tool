@@ -40,26 +40,40 @@ void Operation::search_all() const{
   PQclear(res);
 }
 
-void Operation::search_string(const std::string& needle) const{
+void Operation::search_string(const char** needles, int count) const{
   // search libraries containing the specified string
   PGresult* res = this->res;
   int rows = this->rows;
 
   int fnumberOfName = PQfnumber(res, "name");
   std::string name;
-  bool flagFound = false;
+  int numberOfMatches = 0;
   for (int i=0; i<rows; ++i) {
     name = PQgetvalue(res, i, fnumberOfName);
-    if(name.find(needle) != std::string::npos){
+
+    bool flagFound = false;
+    for (int j = 0; j<count; ++j) {
+      if (name.find(needles[j]) != std::string::npos) {
+        flagFound = true;
+        break;
+      }
+    }
+
+    if (flagFound) {
       std::cout << name << "\n";
-      flagFound = true;
+      numberOfMatches++;
     }
   }
 
-  if(flagFound)
+  if(numberOfMatches > 0) {
     std::cout << std::flush;
-  else{
-    std::cerr << "no libraries matching '" << needle << "' found." << std::endl;
+  } else {
+    std::cerr << "no libraries matching with '";
+    for (int j = 0; j<count; ++j) {
+      if(j > 0) std::cerr << ", ";
+      std::cerr << needles[j];
+    }
+    std::cerr << "' found." << std::endl;
   }
 
   PQclear(res);
