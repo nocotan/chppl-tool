@@ -30,7 +30,7 @@ $ echo "export PATH=$PATH:~/chppl-tool/chppl-tool/bin" >> ~/.bashrc
 ```$ chppl help```
 
 ###Search package  
-```$ chppl search```  
+```$ chppl search <package name>```  
 
 ###Install package  
 ```$ chppl install <package name>```  
