@@ -13,7 +13,7 @@ like Python pip or Ruby gems
 [chppL](https://chppl.herokuapp.com/)  
 
 
-##Install
+## Install
 
 ```
 $ cd  
@@ -24,23 +24,23 @@ $ echo "export PATH=$PATH:~/chppl-tool/chppl-tool/bin" >> ~/.bashrc
 ```  
 
 
-##Usage   
+## Usage   
 
-###Show help commands
+### Show help commands
 ```$ chppl help```
 
-###Search package  
+### Search package  
 ```$ chppl search <package name>```  
 
-###Install package  
+### Install package  
 ```$ chppl install <package name>```  
 
-###Download package
+### Download package
 ```$ chppl download <package name>```
 
-###Compile
+### Compile
 ```$ g++ -I$HOME/.chppl/libs test.cpp```  
 
-##Require
-###Linux
+## Require
+### Linux
 ```$ sudo apt-get install subversion subversion-tools postgresql postgresql-server-dev-9.3```
