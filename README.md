@@ -8,12 +8,16 @@
 
 [![Twitter](https://img.shields.io/twitter/url/https/github.com/nocotan/chppl-tool.svg?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=%5Bobject%20Object%5D)
 
-C/C++ package manager for header only, single file library  
-like Python pip or Ruby gems  
+chppL is the C/C++ package manager for header only, single file library like Python pip or Ruby gems.
+
+This enables easy registration / installation of C ++ header-only libraries.
+
 [chppL](https://chppl.herokuapp.com/)  
 
 
 ## Install
+
+Please install with the following command.
 
 ```
 $ cd  
@@ -24,23 +28,33 @@ $ echo "export PATH=$PATH:~/chppl-tool/chppl-tool/bin" >> ~/.bashrc
 ```  
 
 
-## Usage   
+## Usage
+
+How to use each command.
 
 ### Show help commands
+
 ```$ chppl help```
 
 ### Search package  
+
 ```$ chppl search <package name>```  
 
-### Install package  
+### Install package 
+
 ```$ chppl install <package name>```  
 
 ### Download package
+
 ```$ chppl download <package name>```
 
 ### Compile
+
+By specifying /libs in the chppL installation directory, you can easily link C ++ libraries.
+
 ```$ g++ -I$HOME/.chppl/libs test.cpp```  
 
-## Require
+## Requirements
+
 ### Linux
 ```$ sudo apt-get install subversion subversion-tools postgresql postgresql-server-dev-9.3```
